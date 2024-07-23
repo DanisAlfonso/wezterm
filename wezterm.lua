@@ -14,6 +14,7 @@ local config = {
 	window_background_opacity = 0.98, -- Set your desired opacity level here
 	initial_cols = 120, -- Set your desired number of columns here
 	initial_rows = 39, -- Set your desired number of rows here
+	enable_tab_bar = false, -- Disable the tab bar
 
 	-- Set the initial color scheme based on the current appearance
 	color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
