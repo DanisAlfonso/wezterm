@@ -1,27 +1,75 @@
 local wezterm = require("wezterm")
 
--- Function to determine color scheme based on system appearance
+local neosolarized_dark = {
+	background = "#001217",
+	foreground = "#708183",
+	cursor_bg = "#708183",
+	selection_bg = "#fcf4dc",
+	selection_fg = "#001e26",
+	ansi = { "#002b36", "#dc322f", "#859900", "#b58900", "#268bd2", "#d33682", "#2aa198", "#e9e2cb" },
+	brights = { "#001e26", "#cb4b16", "#465a61", "#52676f", "#708183", "#6c71c4", "#81908f", "#fcf4dc" },
+	tab_bar = {
+		background = "#073642",
+		active_tab = {
+			fg_color = "#181926",
+			bg_color = "#268bd2",
+		},
+		inactive_tab = {
+			fg_color = "#CAD3F5",
+			bg_color = "#586e75",
+		},
+	},
+}
+
+local neosolarized_light = {
+	background = "#fcf4dc",
+	foreground = "#002b36",
+	cursor_bg = "#708183",
+	selection_bg = "#52676f",
+	selection_fg = "#001e26",
+	ansi = { "#002b36", "#dc322f", "#859900", "#b58900", "#268bd2", "#d33682", "#2aa198", "#e9e2cb" },
+	brights = { "#001e26", "#cb4b16", "#465a61", "#52676f", "#708183", "#6c71c4", "#81908f", "#fcf4dc" },
+	tab_bar = {
+		background = "#073642",
+		active_tab = {
+			fg_color = "#181926",
+			bg_color = "#cad3f5",
+		},
+		inactive_tab = {
+			fg_color = "#586e75",
+			bg_color = "#cad3f5",
+		},
+	},
+}
+
 local function scheme_for_appearance(appearance)
-	if appearance:find("duckbones") then
-		return "Dark" -- Replace with your preferred dark mode scheme
+	if appearance:find("Dark") then
+		return "NeoSolarized Dark"
 	else
-		return "Molokai" -- Replace with your preferred light mode scheme
+		return "NeoSolarized Light"
 	end
 end
 
 local config = {
-	font_size = 15.0, -- Set your desired font size here
-	window_background_opacity = 0.98, -- Set your desired opacity level here
-	initial_cols = 120, -- Set your desired number of columns here
-	initial_rows = 39, -- Set your desired number of rows here
-	enable_tab_bar = false, -- Disable the tab bar
-
-	-- Set the initial color scheme based on the current appearance
+	font_size = 14.0,
+	window_background_opacity = 0.96,
+	macos_window_background_blur = 0,
+	initial_cols = 120,
+	initial_rows = 39,
+	enable_tab_bar = false,
+	color_schemes = {
+		["NeoSolarized Dark"] = neosolarized_dark,
+		["NeoSolarized Light"] = neosolarized_light,
+	},
 	color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
-
-	-- Key bindings
+	window_padding = {
+		left = 2,
+		right = 2,
+		top = 2,
+		bottom = 2,
+	},
+	window_decorations = "RESIZE",
 	keys = {
-		-- Toggle full screen
 		{
 			key = "F",
 			mods = "CTRL|CMD",
@@ -53,7 +101,6 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 	window:set_config_overrides(overrides)
 end)
 
--- Event listener to reload the configuration when the system appearance changes
 wezterm.on("window-config-reloaded", function(window)
 	local overrides = window:get_config_overrides() or {}
 	local appearance = wezterm.gui.get_appearance()
