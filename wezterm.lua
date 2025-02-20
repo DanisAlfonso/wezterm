@@ -1,74 +1,35 @@
 local wezterm = require("wezterm")
 
-local neosolarized_dark = {
-	background = "#001217",
-	foreground = "#708183",
-	cursor_bg = "#708183",
-	selection_bg = "#fcf4dc",
-	selection_fg = "#001e26",
-	ansi = { "#002b36", "#dc322f", "#859900", "#b58900", "#268bd2", "#d33682", "#2aa198", "#e9e2cb" },
-	brights = { "#001e26", "#cb4b16", "#465a61", "#52676f", "#708183", "#6c71c4", "#81908f", "#fcf4dc" },
-	tab_bar = {
-		background = "#073642",
-		active_tab = {
-			fg_color = "#181926",
-			bg_color = "#268bd2",
-		},
-		inactive_tab = {
-			fg_color = "#CAD3F5",
-			bg_color = "#586e75",
-		},
-	},
-}
-
-local neosolarized_light = {
-	background = "#fcf4dc",
-	foreground = "#002b36",
-	cursor_bg = "#708183",
-	selection_bg = "#52676f",
-	selection_fg = "#001e26",
-	ansi = { "#002b36", "#dc322f", "#859900", "#b58900", "#268bd2", "#d33682", "#2aa198", "#e9e2cb" },
-	brights = { "#001e26", "#cb4b16", "#465a61", "#52676f", "#708183", "#6c71c4", "#81908f", "#fcf4dc" },
-	tab_bar = {
-		background = "#073642",
-		active_tab = {
-			fg_color = "#181926",
-			bg_color = "#cad3f5",
-		},
-		inactive_tab = {
-			fg_color = "#586e75",
-			bg_color = "#cad3f5",
-		},
-	},
-}
+local gigavolt_base16 = wezterm.get_builtin_color_schemes()["Gigavolt (base16)"]
+local github_base16 = wezterm.get_builtin_color_schemes()["Github (base16)"]
 
 local function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
-		return "NeoSolarized Dark"
+		return "Hardcore"
 	else
-		return "NeoSolarized Light"
+		return "Github (base16)"
 	end
 end
 
 local config = {
 	font_size = 14.0,
-	window_background_opacity = 0.96,
+	window_background_opacity = 0.99,
 	macos_window_background_blur = 0,
 	initial_cols = 120,
 	initial_rows = 39,
 	enable_tab_bar = false,
 	color_schemes = {
-		["NeoSolarized Dark"] = neosolarized_dark,
-		["NeoSolarized Light"] = neosolarized_light,
+		["Gigavolt (base16)"] = gigavolt_base16,
+		["Github (base16)"] = github_base16,
 	},
 	color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
 	window_padding = {
-		left = 2,
-		right = 2,
-		top = 2,
-		bottom = 2,
+		left = 10,
+		right = 10,
+		top = 10,
+		bottom = 10,
 	},
-	window_decorations = "RESIZE",
+	window_decorations = "TITLE | RESIZE",
 	keys = {
 		{
 			key = "F",
