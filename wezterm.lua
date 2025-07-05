@@ -5,19 +5,21 @@ local github_base16 = wezterm.get_builtin_color_schemes()["Github (base16)"]
 
 local function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
-		return "Hardcore"
+		return "Arthur"
 	else
 		return "Github (base16)"
 	end
 end
 
 local config = {
-	font_size = 14.0,
-	window_background_opacity = 0.99,
+	font = wezterm.font("Monaspace Radon"),
+	font_size = 16.0,
+	window_background_opacity = 0.95,
 	macos_window_background_blur = 0,
 	initial_cols = 120,
 	initial_rows = 39,
 	enable_tab_bar = false,
+	default_cursor_style = "BlinkingBar",
 	color_schemes = {
 		["Gigavolt (base16)"] = gigavolt_base16,
 		["Github (base16)"] = github_base16,
