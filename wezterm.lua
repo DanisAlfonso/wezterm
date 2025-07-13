@@ -1,29 +1,22 @@
 local wezterm = require("wezterm")
 
-local gigavolt_base16 = wezterm.get_builtin_color_schemes()["Gigavolt (base16)"]
-local github_base16 = wezterm.get_builtin_color_schemes()["Github (base16)"]
-
 local function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
-		return "Arthur"
+		return "Catppuccin Mocha"
 	else
-		return "Github (base16)"
+		return "Catppuccin Latte"
 	end
 end
 
 local config = {
-	font = wezterm.font("Monaspace Radon"),
+	font = wezterm.font("FiraCode Nerd Font"),
 	font_size = 16.0,
-	window_background_opacity = 0.95,
-	macos_window_background_blur = 0,
+	window_background_opacity = 0.8,
+	macos_window_background_blur = 20,
 	initial_cols = 120,
-	initial_rows = 39,
+	initial_rows = 36,
 	enable_tab_bar = false,
 	default_cursor_style = "BlinkingBar",
-	color_schemes = {
-		["Gigavolt (base16)"] = gigavolt_base16,
-		["Github (base16)"] = github_base16,
-	},
 	color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
 	window_padding = {
 		left = 10,
